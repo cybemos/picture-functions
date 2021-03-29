@@ -19,7 +19,7 @@ public class QuadTreeService {
     }
 
     public QuadTree createQuadTree(BufferedImage image, int maxDeepness) {
-        ImageSubView view = new ImageSubView(image);
+        ImageSubView view = ImageSubView.from(image);
         QuadTree.Node root = createNode(maxDeepness, 1, view);
         return new QuadTree(root);
     }
@@ -58,7 +58,7 @@ public class QuadTreeService {
             return QuadTree.Node.from(deepness, view.getArea(), averageColor);
         }
         List<QuadTree.Node> nodes = areas.stream()
-                .map(area -> new ImageSubView(view.getImage(), area))
+                .map(area -> ImageSubView.from(view.getImage(), area))
                 .map(subView -> createNode(maxDeepness, deepness + 1, subView))
                 .collect(toList());
         return QuadTree.Node.from(deepness, view.getArea(), nodes);

@@ -1,13 +1,17 @@
 package com.cybemos.model;
 
+import lombok.NonNull;
+import lombok.Value;
+
 import java.util.List;
 import java.util.Objects;
 
-public final class QuadTree {
+@Value
+public class QuadTree {
 
-    private final int deepness;
-    private final int numberOfNodes;
-    private final Node root;
+    int deepness;
+    int numberOfNodes;
+    @NonNull Node root;
 
     public QuadTree(Node root) {
         this.root = Objects.requireNonNull(root);
@@ -18,24 +22,12 @@ public final class QuadTree {
         this.numberOfNodes = root.computeNumberOfNodes();
     }
 
-    public int getDeepness() {
-        return deepness;
-    }
-
-    public int getNumberOfNodes() {
-        return numberOfNodes;
-    }
-
     public int getWidth() {
         return root.getArea().getWidth();
     }
 
     public int getHeight() {
         return root.getArea().getHeight();
-    }
-
-    public Node getRoot() {
-        return root;
     }
 
     @Override
@@ -46,12 +38,13 @@ public final class QuadTree {
                 '}';
     }
 
+    @Value
     public static class Node {
 
-        private final int deepness;
-        private final List<Node> children;
-        private final Area area;
-        private final Color color;
+        int deepness;
+        @NonNull List<Node> children;
+        @NonNull Area area;
+        Color color;
 
         private Node(int deepness, Area area, Color color, List<Node> children) {
             this.deepness = deepness;

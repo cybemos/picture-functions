@@ -1,14 +1,19 @@
 package com.cybemos.model;
 
-public final class SumColor {
+import lombok.AllArgsConstructor;
+import lombok.Value;
+
+@Value
+@AllArgsConstructor
+public class SumColor {
 
     public static final SumColor EMPTY = new SumColor();
 
-    private final int number;
-    private final int red;
-    private final int green;
-    private final int blue;
-    private final int alpha;
+    int number;
+    int red;
+    int green;
+    int blue;
+    int alpha;
 
     private SumColor() {
         number = 0;
@@ -16,14 +21,6 @@ public final class SumColor {
         green = 0;
         blue = 0;
         alpha = 0;
-    }
-
-    private SumColor(int number, int red, int green, int blue, int alpha) {
-        this.number = number;
-        this.red = red;
-        this.green = green;
-        this.blue = blue;
-        this.alpha = alpha;
     }
 
     public SumColor(Color color) {

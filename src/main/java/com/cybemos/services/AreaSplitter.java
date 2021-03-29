@@ -3,7 +3,6 @@ package com.cybemos.services;
 import com.cybemos.model.Area;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 public class AreaSplitter {
 

@@ -1,28 +1,18 @@
 package com.cybemos.model;
 
+import lombok.NonNull;
+import lombok.Value;
+
 import java.awt.image.BufferedImage;
-import java.util.Objects;
 
-public final class ImageSubView {
+@Value(staticConstructor = "from")
+public class ImageSubView {
 
-    private final BufferedImage image;
-    private final Area area;
+    @NonNull BufferedImage image;
+    @NonNull Area area;
 
-    public ImageSubView(BufferedImage image) {
-        this(image, new Area(0, 0, image.getWidth(), image.getHeight()));
-    }
-
-    public ImageSubView(BufferedImage image, Area area) {
-        this.image = Objects.requireNonNull(image);
-        this.area = Objects.requireNonNull(area);
-    }
-
-    public BufferedImage getImage() {
-        return image;
-    }
-
-    public Area getArea() {
-        return area;
+    public static ImageSubView from(BufferedImage image) {
+        return new ImageSubView(image, new Area(0, 0, image.getWidth(), image.getHeight()));
     }
 
 }
