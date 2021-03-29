@@ -25,8 +25,7 @@ public class ImageService {
         return bufferedImage;
     }
 
-    public BufferedImage computeShape(BufferedImage image, int blurLevel) {
-        Color shape = new Color(180, 180, 180, 255);
+    public BufferedImage computeShape(BufferedImage image, int blurLevel, Color shapeColor) {
         Color noShape = Color.TRANSPARENT;
         AverageFunction averageFunction = new HorizontalAverageFunction();
         BufferedImage bufferedImage = new BufferedImage(image.getWidth(), image.getHeight(), TYPE_INT_ARGB);
@@ -36,7 +35,7 @@ public class ImageService {
             if (colorService.looksLike(averageColor, color, 0.05)) {
                 bufferedImage.setRGB(colorPosition.getX(), colorPosition.getY(), noShape.toARGB());
             } else {
-                bufferedImage.setRGB(colorPosition.getX(), colorPosition.getY(), shape.toARGB());
+                bufferedImage.setRGB(colorPosition.getX(), colorPosition.getY(), shapeColor.toARGB());
             }
         });
         return bufferedImage;

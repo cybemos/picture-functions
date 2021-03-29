@@ -1,5 +1,6 @@
 package com.cybemos.services;
 
+import com.cybemos.model.Color;
 import com.cybemos.model.QuadTree;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -43,7 +44,8 @@ public class QuadTreeServiceTest {
         BufferedImage image = imageReader.read(new File("C:\\Users\\Cybemos\\Pictures\\Minorque\\20170902_112142.jpg"));
 
         ImageService imageService = new ImageService();
-        BufferedImage blurredImage = imageService.computeShape(image, 7);
+        Color shape = new Color(180, 180, 180, 255);
+        BufferedImage blurredImage = imageService.computeShape(image, 7, shape);
         imageWriter.save(blurredImage, new File("C:\\Users\\Cybemos\\Pictures\\shape.png"));
     }
 
