@@ -79,7 +79,7 @@ public class ImageService {
         BufferedImage bufferedImage = new BufferedImage(image.getWidth(), image.getHeight(), TYPE_INT_ARGB);
         for (int x = 0 ; x < image.getWidth() ; x++) {
             for (int y = 0 ; y < image.getHeight() ; y++) {
-                bufferedImage.setRGB(x, y, colorService.inverse(Color.fromRGB(image.getRGB(x, y))).toARGB());
+                bufferedImage.setRGB(x, y, colorService.reverse(Color.fromRGB(image.getRGB(x, y))).toARGB());
             }
         }
         return bufferedImage;

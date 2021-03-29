@@ -20,7 +20,7 @@ public class ColorService {
         );
     }
 
-    public Color inverse(Color color) {
+    public Color reverse(Color color) {
         return new Color(255 - color.getRed(), 255 - color.getGreen(), 255 - color.getBlue(), color.getAlpha());
     }
 
