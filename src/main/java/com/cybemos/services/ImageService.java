@@ -18,6 +18,10 @@ public class ImageService {
 
     public BufferedImage blur(BufferedImage image, int blurLevel) {
         AverageFunction averageFunction = new HorizontalAverageFunction();
+        return blur(image, averageFunction, blurLevel);
+    }
+
+    public BufferedImage blur(BufferedImage image, AverageFunction averageFunction, int blurLevel) {
         BufferedImage bufferedImage = new BufferedImage(image.getWidth(), image.getHeight(), TYPE_INT_ARGB);
         averageFunction.average(image, blurLevel).forEach(colorPosition -> {
             bufferedImage.setRGB(colorPosition.getX(), colorPosition.getY(), colorPosition.getColor().toARGB());

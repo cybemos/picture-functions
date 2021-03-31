@@ -1,20 +1,20 @@
-package com.cybemos.services;
+package com.cybemos.functions;
 
 import com.cybemos.model.Area;
 import com.cybemos.model.Color;
 import com.cybemos.model.ColorPosition;
+import com.cybemos.model.SumColor;
 
 import java.awt.image.BufferedImage;
-import java.util.function.BiFunction;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static java.util.function.Function.identity;
 
-public class SimpleAverageFunction implements BiFunction<BufferedImage, Integer, Stream<ColorPosition>> {
+public class SimpleAverageFunction implements AverageFunction {
 
     @Override
-    public Stream<ColorPosition> apply(BufferedImage image, Integer blurLevel) {
+    public Stream<ColorPosition> average(BufferedImage image, int blurLevel) {
         return IntStream.range(0, image.getHeight()).mapToObj(y ->
                 IntStream.range(0, image.getWidth()).mapToObj(x -> {
                     Area area = getArea(image, x, y, blurLevel);
@@ -33,15 +33,14 @@ public class SimpleAverageFunction implements BiFunction<BufferedImage, Integer,
     }
 
     private Color computeAverage(BufferedImage image, Area area) {
-        return Color.fromRGB(image.getRGB(area.getX(), area.getY())); // TODO
-        /*SumColor sumColor = new SumColor();
+        SumColor sumColor = SumColor.EMPTY;
         for (int y = area.getY() ; y < area.getY() + area.getHeight() ; y++) {
             for (int x = area.getX() ; x < area.getX() + area.getWidth() ; x++) {
                 Color color = Color.fromRGB(image.getRGB(x, y));
                 sumColor.add(new SumColor(color));
             }
         }
-        return sumColor.toColor();*/
+        return sumColor.toColor();
     }
 
 }

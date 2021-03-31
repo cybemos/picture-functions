@@ -1,5 +1,7 @@
 package com.cybemos.services;
 
+import com.cybemos.functions.HorizontalAverageFunction;
+import com.cybemos.functions.SimpleAverageFunction;
 import com.cybemos.model.Color;
 import com.cybemos.model.QuadTree;
 import org.junit.Ignore;
@@ -95,19 +97,19 @@ public class QuadTreeServiceTest {
 
         ImageService imageService = new ImageService();
 
-        int blurLevel = 7;
+        int blurLevel = 1;
 
         long t1 = System.currentTimeMillis();
-        BufferedImage blurredImage = imageService.blur(image, blurLevel);
+        BufferedImage blurredImage = imageService.blur(image, new HorizontalAverageFunction(), blurLevel);
         long t2 = System.currentTimeMillis();
         System.out.println(String.format("Time taken (normal) : %s ms", t2 - t1));
         imageWriter.save(blurredImage, new File("C:\\Users\\Cybemos\\Pictures\\blur.jpg"));
 
-        /*long t3 = System.currentTimeMillis();
-        BufferedImage blurredImage2 = imageService.simpleBlur(image, blurLevel);
+        long t3 = System.currentTimeMillis();
+        BufferedImage blurredImage2 = imageService.blur(image, new SimpleAverageFunction(), blurLevel);
         long t4 = System.currentTimeMillis();
         System.out.println(String.format("Time taken (simple) : %s ms", t4 - t3));
-        imageWriter.save(blurredImage2, new File("C:\\Users\\Cybemos\\Pictures\\simple_blur.jpg"));*/
+        imageWriter.save(blurredImage2, new File("C:\\Users\\Cybemos\\Pictures\\simple_blur.jpg"));
     }
 
 }
