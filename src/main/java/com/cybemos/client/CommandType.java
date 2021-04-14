@@ -18,6 +18,12 @@ public enum CommandType {
             return visitor.visitQuadTree();
         }
     },
+    REVERSE("reverse") {
+        @Override
+        public <R> R visit(CommandTypeVisitor<R> visitor) {
+            return visitor.visitReverse();
+        }
+    },
     HELP("help") {
         @Override
         public <R> R visit(CommandTypeVisitor<R> visitor) {
@@ -46,6 +52,7 @@ public enum CommandType {
     public interface CommandTypeVisitor<R> {
         R visitBlur();
         R visitQuadTree();
+        R visitReverse();
         R visitHelp();
     }
 

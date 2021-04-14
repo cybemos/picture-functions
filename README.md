@@ -9,6 +9,19 @@ Following functions were executed with this image as source :
 
 ![Reference image](documentation/images/lenna.png)
 
+### Reverse function
+
+Arguments to give to client :
+```
+reverse --source path-to-source --dest path-to-dest
+```
+
+Reverse function allow to reverse color for an image.
+
+Example of reverse :
+
+![Reverse](documentation/images/revserse/lenna.png)
+
 ### Blur function
 
 Arguments to give to client :
