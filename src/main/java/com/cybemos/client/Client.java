@@ -2,14 +2,8 @@ package com.cybemos.client;
 
 import com.beust.jcommander.JCommander;
 import com.cybemos.client.CommandType.CommandTypeVisitor;
-import com.cybemos.client.args.BlurArgs;
-import com.cybemos.client.args.QuadTreeArgs;
-import com.cybemos.client.args.ReverseArgs;
-import com.cybemos.client.args.ShapeArgs;
-import com.cybemos.client.commands.BlurCommand;
-import com.cybemos.client.commands.QuadTreeCommand;
-import com.cybemos.client.commands.ReverseCommand;
-import com.cybemos.client.commands.ShapeCommand;
+import com.cybemos.client.args.*;
+import com.cybemos.client.commands.*;
 
 public class Client {
 
@@ -18,11 +12,13 @@ public class Client {
         QuadTreeArgs quadTreeArgs = new QuadTreeArgs();
         ReverseArgs reverseArgs = new ReverseArgs();
         ShapeArgs shapeArgs = new ShapeArgs();
+        DiffArgs diffArgs = new DiffArgs();
         JCommander jCommander = JCommander.newBuilder()
                 .addCommand(blurArgs)
                 .addCommand(quadTreeArgs)
                 .addCommand(reverseArgs)
                 .addCommand(shapeArgs)
+                .addCommand(diffArgs)
                 .build();
         jCommander.parse(args);
 
@@ -61,6 +57,13 @@ public class Client {
             public Void visitShape() {
                 ShapeCommand shapeCommand = new ShapeCommand();
                 shapeCommand.execute(shapeArgs);
+                return null;
+            }
+
+            @Override
+            public Void visitDiff() {
+                DiffCommand command = new DiffCommand();
+                command.execute(diffArgs);
                 return null;
             }
 

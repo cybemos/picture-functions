@@ -58,6 +58,20 @@ Some example of Shape with multiple colors :
 ![Deepness 3](documentation/images/shape/lenna_blur_level_3.png)
 ![Deepness 7](documentation/images/shape/lenna_blur_level_7.png)
 
+### Diff function
+
+Arguments to give to client :
+```
+diff  --source path-to-source1 --source path-to-source2 --dest path-to-dest
+```
+
+Examples using the origin picture and blurred image with blur level 3 & 7.
+As you can see, there are less differences in the first image with blur level 3.
+It's because when the blur level is high, we loose a lot a quality in the picture.
+
+![Deepness 3](documentation/images/diff/diff_lenna_with_blurred_lenna_3.png)
+![Deepness 7](documentation/images/diff/diff_lenna_with_blurred_lenna_7.png)
+
 ### QuadTree function
 
 Arguments to give to client :

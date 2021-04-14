@@ -30,6 +30,12 @@ public enum CommandType {
             return visitor.visitShape();
         }
     },
+    DIFF("diff") {
+        @Override
+        public <R> R visit(CommandTypeVisitor<R> visitor) {
+            return visitor.visitDiff();
+        }
+    },
     HELP("help") {
         @Override
         public <R> R visit(CommandTypeVisitor<R> visitor) {
@@ -60,6 +66,7 @@ public enum CommandType {
         R visitQuadTree();
         R visitReverse();
         R visitShape();
+        R visitDiff();
         R visitHelp();
     }
 
