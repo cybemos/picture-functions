@@ -19,6 +19,9 @@ public class QuadTreeService {
     }
 
     public QuadTree createQuadTree(BufferedImage image, int maxDeepness) {
+        if (maxDeepness < 1) {
+            throw new IllegalArgumentException("maxDeepness < 1");
+        }
         ImageSubView view = ImageSubView.from(image);
         QuadTree.Node root = createNode(maxDeepness, 1, view);
         return new QuadTree(root);

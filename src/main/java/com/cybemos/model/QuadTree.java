@@ -50,7 +50,7 @@ public class QuadTree {
             this.deepness = deepness;
             this.area = area;
             this.color = color;
-            this.children = children;
+            this.children = List.copyOf(children);
         }
 
         public static Node from(int deepness, Area area, Color color) {
