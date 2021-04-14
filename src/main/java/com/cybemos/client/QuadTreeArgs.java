@@ -4,9 +4,9 @@ import com.beust.jcommander.Parameter;
 import com.beust.jcommander.Parameters;
 import lombok.Data;
 
-@Parameters(commandNames="blur")
+@Parameters(commandNames="quadtree")
 @Data
-public class BlurArgs {
+public class QuadTreeArgs {
 
     @Parameter(names = "--source", description = "Image Source", required = true)
     private String source;
@@ -15,10 +15,10 @@ public class BlurArgs {
     private String destination;
 
     @Parameter(
-            names = "--blurlevel",
-            description = "Level of blur. The more the value is high, the more the image is blurred",
-            required = false
+            names = "--deepness",
+            description = "Max deepness of quadtree. The more the value is high, the more the quality is high",
+            required = true
     )
-    private Integer blurLevel = 3;
+    private Integer deepness;
 
 }
