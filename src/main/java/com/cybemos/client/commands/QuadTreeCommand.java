@@ -1,6 +1,6 @@
 package com.cybemos.client.commands;
 
-import com.cybemos.client.QuadTreeArgs;
+import com.cybemos.client.args.QuadTreeArgs;
 import com.cybemos.model.QuadTree;
 import com.cybemos.services.ImageReader;
 import com.cybemos.services.ImageWriter;

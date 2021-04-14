@@ -29,8 +29,7 @@ public class ImageService {
         return bufferedImage;
     }
 
-    public BufferedImage computeShape(BufferedImage image, int blurLevel, Color shapeColor) {
-        Color noShape = Color.TRANSPARENT;
+    public BufferedImage computeUniColorShape(BufferedImage image, int blurLevel, Color noShape, Color shapeColor) {
         AverageFunction averageFunction = new HorizontalAverageFunction();
         BufferedImage bufferedImage = new BufferedImage(image.getWidth(), image.getHeight(), TYPE_INT_ARGB);
         averageFunction.average(image, blurLevel).forEach(colorPosition -> {
@@ -45,7 +44,7 @@ public class ImageService {
         return bufferedImage;
     }
 
-    public BufferedImage computeShape2(BufferedImage image, int blurLevel) {
+    public BufferedImage computeShape(BufferedImage image, int blurLevel) {
         AverageFunction averageFunction = new HorizontalAverageFunction();
         BufferedImage bufferedImage = new BufferedImage(image.getWidth(), image.getHeight(), TYPE_INT_ARGB);
         averageFunction.average(image, blurLevel).forEach(colorPosition -> {

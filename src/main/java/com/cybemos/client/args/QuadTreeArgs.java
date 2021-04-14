@@ -1,4 +1,4 @@
-package com.cybemos.client;
+package com.cybemos.client.args;
 
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.Parameters;

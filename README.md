@@ -39,6 +39,25 @@ Some example of blur :
 ![Blur level 7](documentation/images/blur/lenna_blur_level_7.png)
 ![Blur level 15](documentation/images/blur/lenna_blur_level_15.png)
 
+### Shape function
+
+Arguments to give to client :
+```
+shape [--unicolor] --source path-to-source --dest path-to-dest --blurlevel blur-level
+```
+
+Shape function allow to see shapes of an image.
+
+Some example of Shape with a single color :
+
+![Deepness 3](documentation/images/shape/unicolor_lenna_blur_level_3.png)
+![Deepness 7](documentation/images/shape/unicolor_lenna_blur_level_7.png)
+
+Some example of Shape with multiple colors :
+
+![Deepness 3](documentation/images/shape/lenna_blur_level_3.png)
+![Deepness 7](documentation/images/shape/lenna_blur_level_7.png)
+
 ### QuadTree function
 
 Arguments to give to client :

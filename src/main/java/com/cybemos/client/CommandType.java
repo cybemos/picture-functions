@@ -24,6 +24,12 @@ public enum CommandType {
             return visitor.visitReverse();
         }
     },
+    SHAPE("shape") {
+        @Override
+        public <R> R visit(CommandTypeVisitor<R> visitor) {
+            return visitor.visitShape();
+        }
+    },
     HELP("help") {
         @Override
         public <R> R visit(CommandTypeVisitor<R> visitor) {
@@ -53,6 +59,7 @@ public enum CommandType {
         R visitBlur();
         R visitQuadTree();
         R visitReverse();
+        R visitShape();
         R visitHelp();
     }
 
