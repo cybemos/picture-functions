@@ -7,6 +7,8 @@ import com.cybemos.model.Color;
 import java.awt.image.BufferedImage;
 
 import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
+import static java.lang.Math.abs;
+import static java.lang.Math.max;
 
 public class ImageService {
 
@@ -51,9 +53,9 @@ public class ImageService {
             Color color = Color.fromRGB(image.getRGB(colorPosition.getX(), colorPosition.getY()));
             Color averageColor = colorPosition.getColor();
             Color newColor = new Color(
-                    255 - Math.abs(color.getRed() - averageColor.getRed()) * 2,
-                    255 - Math.abs(color.getGreen() - averageColor.getGreen()) * 2,
-                    255 - Math.abs(color.getBlue() - averageColor.getBlue()) * 2,
+                    max(255 - abs(color.getRed() - averageColor.getRed()) * 2, 0),
+                    max(255 - abs(color.getGreen() - averageColor.getGreen()) * 2, 0),
+                    max(255 - abs(color.getBlue() - averageColor.getBlue()) * 2, 0),
                     255
             );
             bufferedImage.setRGB(colorPosition.getX(), colorPosition.getY(), colorService.gray(newColor).toARGB());
