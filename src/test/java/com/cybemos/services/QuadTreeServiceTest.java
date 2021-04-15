@@ -18,7 +18,7 @@ public class QuadTreeServiceTest {
         // Given
         QuadTreeService quadTreeService = new QuadTreeService();
         BufferedImage source = new BufferedImage(1, 1, TYPE_INT_RGB);
-        source.setRGB(0, 0, new Color(255, 0, 0, 255).toARGB());
+        source.setRGB(0, 0, Color.RED.toARGB());
 
         // When
         quadTreeService.createQuadTree(source, 0);
@@ -47,7 +47,7 @@ public class QuadTreeServiceTest {
         // Given
         QuadTreeService quadTreeService = new QuadTreeService();
         BufferedImage source = new BufferedImage(1, 1, TYPE_INT_RGB);
-        source.setRGB(0, 0, new Color(255, 0, 0, 255).toARGB());
+        source.setRGB(0, 0,  Color.RED.toARGB());
 
         // When
         QuadTree quadTree = quadTreeService.createQuadTree(source, 10);
@@ -61,7 +61,7 @@ public class QuadTreeServiceTest {
         // Given
         QuadTreeService quadTreeService = new QuadTreeService();
         BufferedImage source = new BufferedImage(1, 1, TYPE_INT_RGB);
-        source.setRGB(0, 0, new Color(255, 0, 0, 255).toARGB());
+        source.setRGB(0, 0,  Color.RED.toARGB());
 
         // When
         QuadTree quadTree = quadTreeService.createQuadTree(source, 10);
@@ -75,14 +75,13 @@ public class QuadTreeServiceTest {
         // Given
         QuadTreeService quadTreeService = new QuadTreeService();
         BufferedImage source = new BufferedImage(1, 1, TYPE_INT_RGB);
-        Color red = new Color(255, 0, 0, 255);
-        source.setRGB(0, 0, red.toARGB());
+        source.setRGB(0, 0,  Color.RED.toARGB());
 
         // When
         QuadTree quadTree = quadTreeService.createQuadTree(source, 10);
 
         // Then
-        assertEquals(red, quadTree.getRoot().getColor());
+        assertEquals( Color.RED, quadTree.getRoot().getColor());
     }
 
     @Test
@@ -90,7 +89,7 @@ public class QuadTreeServiceTest {
         // Given
         QuadTreeService quadTreeService = new QuadTreeService();
         BufferedImage source = new BufferedImage(2, 1, TYPE_INT_RGB);
-        source.setRGB(0, 0, new Color(255, 0, 0, 255).toARGB());
+        source.setRGB(0, 0,  Color.RED.toARGB());
         source.setRGB(1, 0, new Color(0, 255, 0, 255).toARGB());
 
         // When
@@ -105,7 +104,7 @@ public class QuadTreeServiceTest {
         // Given
         QuadTreeService quadTreeService = new QuadTreeService();
         BufferedImage source = new BufferedImage(2, 1, TYPE_INT_RGB);
-        source.setRGB(0, 0, new Color(255, 0, 0, 255).toARGB());
+        source.setRGB(0, 0,  Color.RED.toARGB());
         source.setRGB(1, 0, new Color(250, 0, 0, 255).toARGB());
 
         // When
@@ -120,7 +119,7 @@ public class QuadTreeServiceTest {
         // Given
         QuadTreeService quadTreeService = new QuadTreeService();
         BufferedImage source = new BufferedImage(2, 1, TYPE_INT_RGB);
-        source.setRGB(0, 0, new Color(255, 0, 0, 255).toARGB());
+        source.setRGB(0, 0,  Color.RED.toARGB());
         source.setRGB(1, 0, new Color(249, 0, 0, 255).toARGB());
 
         // When
@@ -135,7 +134,7 @@ public class QuadTreeServiceTest {
         // Given
         QuadTreeService quadTreeService = new QuadTreeService();
         BufferedImage source = new BufferedImage(2, 1, TYPE_INT_RGB);
-        source.setRGB(0, 0, new Color(255, 0, 0, 255).toARGB());
+        source.setRGB(0, 0,  Color.RED.toARGB());
         source.setRGB(1, 0, new Color(0, 255, 0, 255).toARGB());
 
         // When
@@ -149,7 +148,7 @@ public class QuadTreeServiceTest {
     public void when_mapping_quadtree_with_dimensions_512x256_to_image_then_image_should_have_dimensions_512x256() {
         // Given
         QuadTreeService quadTreeService = new QuadTreeService();
-        Color red = new Color(255, 0, 0, 255);
+        Color red =  Color.RED;
         QuadTree.Node root = QuadTree.Node.from(1, new Area(0, 0, 512, 256), red);
         QuadTree quadTree = new QuadTree(root);
 
@@ -165,7 +164,7 @@ public class QuadTreeServiceTest {
     public void when_mapping_quadtree_with_color_red_to_image_then_image_should_be_red() {
         // Given
         QuadTreeService quadTreeService = new QuadTreeService();
-        Color red = new Color(255, 0, 0, 255);
+        Color red =  Color.RED;
         QuadTree.Node root = QuadTree.Node.from(1, new Area(0, 0, 1, 1), red);
         QuadTree quadTree = new QuadTree(root);
 

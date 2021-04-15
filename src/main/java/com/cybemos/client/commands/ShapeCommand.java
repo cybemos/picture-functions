@@ -31,8 +31,7 @@ public class ShapeCommand implements Command<ShapeArgs> {
         BufferedImage source = imageReader.read(new File(args.getSource()));
         LOG.info("Making shapes image with dimensions ({} x {})...", source.getWidth(), source.getHeight());
         BufferedImage blurredImage = args.isUnicolor()
-                ? imageService.computeUniColorShape(source, args.getBlurLevel(),
-                    new Color(255, 255, 255, 255), new Color(0, 0, 0, 255))
+                ? imageService.computeUniColorShape(source, args.getBlurLevel(), Color.WHITE, Color.BLACK)
                 : imageService.computeShape(source, args.getBlurLevel());
         LOG.info("Image with dimensions ({} x {}) shaped", source.getWidth(), source.getHeight());
         imageWriter.save(blurredImage, new File(args.getDestination()));
