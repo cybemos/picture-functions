@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 public class AverageFunctionTest {
 
     @Test
-    public void test_one_pixel() {
+    public void when_picture_has_one_pixel_then_average_is_same_as_input() {
         // Given
         BufferedImage source = new BufferedImage(1, 1, TYPE_INT_ARGB);
         Color color = new Color(196, 56, 42, 255);
@@ -37,7 +37,7 @@ public class AverageFunctionTest {
     }
 
     @Test
-    public void test_two_pixels() {
+    public void when_picture_has_two_pixels_then_output_has_one_color_that_is_the_average() {
         // Given
         BufferedImage source = new BufferedImage(2, 1, TYPE_INT_ARGB);
         Color color1 = new Color(197, 56, 42, 255);

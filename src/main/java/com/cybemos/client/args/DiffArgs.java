@@ -2,8 +2,11 @@ package com.cybemos.client.args;
 
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.Parameters;
+import com.beust.jcommander.converters.FileConverter;
+import com.cybemos.client.validators.ExistingFilesValidator;
 import lombok.Data;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,10 +14,16 @@ import java.util.List;
 @Data
 public class DiffArgs {
 
-    @Parameter(names = "--source", description = "Image Source", required = true)
-    private List<String> sources = new ArrayList<>();
+    @Parameter(
+            names = "--source",
+            description = "Image Source",
+            required = true,
+            converter = FileConverter.class,
+            validateValueWith = ExistingFilesValidator.class
+    )
+    private List<File> sources = new ArrayList<>();
 
-    @Parameter(names = "--dest", description = "destination file", required = true)
-    private String destination;
+    @Parameter(names = "--dest", description = "Destination file", required = true, converter = FileConverter.class)
+    private File destination;
 
 }

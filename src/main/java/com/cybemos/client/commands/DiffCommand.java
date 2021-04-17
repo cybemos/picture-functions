@@ -8,11 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 
 public class DiffCommand implements Command<DiffArgs> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(BlurCommand.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DiffCommand.class);
 
     private final ImageReader imageReader;
     private final ImageWriter imageWriter;
@@ -30,13 +29,13 @@ public class DiffCommand implements Command<DiffArgs> {
             throw new IllegalArgumentException("You must specify 2 sources");
         }
         LOG.info("Reading {}...", args.getSources().get(0));
-        BufferedImage source1 = imageReader.read(new File(args.getSources().get(0)));
+        BufferedImage source1 = imageReader.read(args.getSources().get(0));
         LOG.info("Reading {}...", args.getSources().get(1));
-        BufferedImage source2 = imageReader.read(new File(args.getSources().get(1)));
+        BufferedImage source2 = imageReader.read(args.getSources().get(1));
         LOG.info("Making diff image with dimensions ({} x {})...", source1.getWidth(), source1.getHeight());
         BufferedImage diff = imageService.diff(source1, source2);
         LOG.info("Image with dimensions ({} x {}) shaped", source1.getWidth(), source1.getHeight());
-        imageWriter.save(diff, new File(args.getDestination()));
+        imageWriter.save(diff, args.getDestination());
         LOG.info("Image saved as {}", args.getDestination());
     }
 }

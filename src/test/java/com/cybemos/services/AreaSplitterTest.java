@@ -14,7 +14,7 @@ public class AreaSplitterTest {
     private final AreaSplitter splitter = new AreaSplitter();
 
     @Test
-    public void test_normal_split() {
+    public void when_area_is_2x2_then_output_is_4_area_of_dimensions_1x1() {
         // Given
         Area area = new Area(0, 0, 2, 2);
 
@@ -33,7 +33,7 @@ public class AreaSplitterTest {
     }
 
     @Test
-    public void test_unable_to_split() {
+    public void when_area_is_1x1_then_output_is_an_area_of_dimensions_1x1() {
         // Given
         Area area = new Area(0, 0, 1, 1);
 
@@ -46,7 +46,7 @@ public class AreaSplitterTest {
     }
 
     @Test
-    public void test_split_horizontally() {
+    public void when_area_is_1x10_then_output_is_2_areas_of_dimensions_1x5() {
         // Given
         Area area = new Area(0, 0, 1, 10);
 
@@ -63,7 +63,7 @@ public class AreaSplitterTest {
     }
 
     @Test
-    public void test_split_vertically() {
+    public void when_area_is_10x1_then_output_is_2_areas_of_dimensions_5x1() {
         // Given
         Area area = new Area(0, 0, 10, 1);
 

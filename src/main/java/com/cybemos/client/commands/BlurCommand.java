@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 
 public class BlurCommand implements Command<BlurArgs> {
 
@@ -27,11 +26,11 @@ public class BlurCommand implements Command<BlurArgs> {
     @Override
     public void execute(BlurArgs args) {
         LOG.info("Reading {}...", args.getSource());
-        BufferedImage source = imageReader.read(new File(args.getSource()));
+        BufferedImage source = imageReader.read(args.getSource());
         LOG.info("Blurring image with dimensions ({} x {})...", source.getWidth(), source.getHeight());
         BufferedImage blurredImage = imageService.blur(source, args.getBlurLevel());
         LOG.info("Image with dimensions ({} x {}) blurred", source.getWidth(), source.getHeight());
-        imageWriter.save(blurredImage, new File(args.getDestination()));
+        imageWriter.save(blurredImage, args.getDestination());
         LOG.info("Image saved as {}", args.getDestination());
     }
 

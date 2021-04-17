@@ -1,7 +1,7 @@
 # Image Project
 
 In this project, there are multiple functions that transform images.
-Functions can be accessed using the [client](src/main/java/com/cybemos/client).
+Functions can be accessed using the [client](src/main/java/com/cybemos/client/Client.java).
 
 ## Functions
 

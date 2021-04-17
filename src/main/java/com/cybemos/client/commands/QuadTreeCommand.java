@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 
 public class QuadTreeCommand implements Command<QuadTreeArgs> {
 
@@ -28,13 +27,13 @@ public class QuadTreeCommand implements Command<QuadTreeArgs> {
     @Override
     public void execute(QuadTreeArgs args) {
         LOG.info("Reading {}...", args.getSource());
-        BufferedImage source = imageReader.read(new File(args.getSource()));
+        BufferedImage source = imageReader.read(args.getSource());
         LOG.info("Creating quadtree from image with dimensions ({} x {})...", source.getWidth(), source.getHeight());
         QuadTree quadTree = quadTreeService.createQuadTree(source, args.getDeepness());
         LOG.info("Quadtree created (deepness={}, number of nodes={})", quadTree.getDeepness(), quadTree.getNumberOfNodes());
         BufferedImage image = quadTreeService.toImage(quadTree);
         LOG.info("Quadtree mapped to Image with dimensions ({} x {})", source.getWidth(), source.getHeight());
-        imageWriter.save(image, new File(args.getDestination()));
+        imageWriter.save(image, args.getDestination());
         LOG.info("Image saved as {}", args.getDestination());
     }
 

@@ -9,11 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 
 public class ShapeCommand implements Command<ShapeArgs> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(BlurCommand.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ShapeCommand.class);
 
     private final ImageReader imageReader;
     private final ImageWriter imageWriter;
@@ -28,13 +27,13 @@ public class ShapeCommand implements Command<ShapeArgs> {
     @Override
     public void execute(ShapeArgs args) {
         LOG.info("Reading {}...", args.getSource());
-        BufferedImage source = imageReader.read(new File(args.getSource()));
+        BufferedImage source = imageReader.read(args.getSource());
         LOG.info("Making shapes image with dimensions ({} x {})...", source.getWidth(), source.getHeight());
         BufferedImage blurredImage = args.isUnicolor()
                 ? imageService.computeUniColorShape(source, args.getBlurLevel(), Color.WHITE, Color.BLACK)
                 : imageService.computeShape(source, args.getBlurLevel());
         LOG.info("Image with dimensions ({} x {}) shaped", source.getWidth(), source.getHeight());
-        imageWriter.save(blurredImage, new File(args.getDestination()));
+        imageWriter.save(blurredImage, args.getDestination());
         LOG.info("Image saved as {}", args.getDestination());
     }
 }
