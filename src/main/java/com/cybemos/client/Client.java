@@ -7,31 +7,23 @@ import com.cybemos.client.commands.*;
 
 public class Client {
 
-    public static void main(String[] args) {
+    private final JCommander jCommander;
+    private final CommandTypeVisitor commandTypeExecutorVisitor;
+
+    public Client() {
         BlurArgs blurArgs = new BlurArgs();
         QuadTreeArgs quadTreeArgs = new QuadTreeArgs();
         ReverseArgs reverseArgs = new ReverseArgs();
         ShapeArgs shapeArgs = new ShapeArgs();
         DiffArgs diffArgs = new DiffArgs();
-        JCommander jCommander = JCommander.newBuilder()
+        this.jCommander = JCommander.newBuilder()
                 .addCommand(CommandType.BLUR.getName(), blurArgs)
                 .addCommand(CommandType.QUADTREE.getName(), quadTreeArgs)
                 .addCommand(CommandType.REVERSE.getName(), reverseArgs)
                 .addCommand(CommandType.SHAPE.getName(), shapeArgs)
                 .addCommand(CommandType.DIFF.getName(), diffArgs)
                 .build();
-        jCommander.parse(args);
-
-        String parsedCommand = jCommander.getParsedCommand();
-        if (parsedCommand == null) {
-            help();
-            return;
-        }
-
-        CommandType commandType = CommandType.from(parsedCommand)
-                .orElseThrow(() -> new IllegalArgumentException("Unknown command : " + parsedCommand));
-
-        commandType.visit(new CommandTypeVisitor() {
+        this.commandTypeExecutorVisitor = new CommandTypeVisitor() {
             @Override
             public void visitBlur() {
                 BlurCommand command = new BlurCommand();
@@ -66,10 +58,27 @@ public class Client {
             public void visitHelp() {
                 help();
             }
-        });
+        };
     }
 
-    private static void help() {
+    public void execute(String[] args) {
+        jCommander.parse(args);
+        String parsedCommand = jCommander.getParsedCommand();
+        if (parsedCommand == null) {
+            help();
+            return;
+        }
+        CommandType commandType = CommandType.from(parsedCommand)
+                .orElseThrow(() -> new IllegalArgumentException("Unknown command : " + parsedCommand));
+        commandType.visit(commandTypeExecutorVisitor);
+    }
+
+    public static void main(String[] args) {
+        Client client = new Client();
+        client.execute(args);
+    }
+
+    private void help() {
         System.out.println("Available commands :");
         for (CommandType commandType : CommandType.values()) {
             System.out.println(" - " + commandType.getName());
