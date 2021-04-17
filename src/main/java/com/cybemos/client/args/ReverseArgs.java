@@ -4,7 +4,7 @@ import com.beust.jcommander.Parameter;
 import com.beust.jcommander.Parameters;
 import lombok.Data;
 
-@Parameters(commandNames="reverse")
+@Parameters
 @Data
 public class ReverseArgs {
 

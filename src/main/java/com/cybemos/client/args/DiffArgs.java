@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
 
-@Parameters(commandNames="diff")
+@Parameters
 @Data
 public class DiffArgs {
 

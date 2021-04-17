@@ -14,11 +14,11 @@ public class Client {
         ShapeArgs shapeArgs = new ShapeArgs();
         DiffArgs diffArgs = new DiffArgs();
         JCommander jCommander = JCommander.newBuilder()
-                .addCommand(blurArgs)
-                .addCommand(quadTreeArgs)
-                .addCommand(reverseArgs)
-                .addCommand(shapeArgs)
-                .addCommand(diffArgs)
+                .addCommand(CommandType.BLUR.getName(), blurArgs)
+                .addCommand(CommandType.QUADTREE.getName(), quadTreeArgs)
+                .addCommand(CommandType.REVERSE.getName(), reverseArgs)
+                .addCommand(CommandType.SHAPE.getName(), shapeArgs)
+                .addCommand(CommandType.DIFF.getName(), diffArgs)
                 .build();
         jCommander.parse(args);
 
@@ -29,7 +29,7 @@ public class Client {
         }
 
         CommandType commandType = CommandType.from(parsedCommand)
-                .orElseThrow(() -> new RuntimeException("Unknown command : " + parsedCommand));
+                .orElseThrow(() -> new IllegalArgumentException("Unknown command : " + parsedCommand));
 
         commandType.visit(new CommandTypeVisitor() {
             @Override
