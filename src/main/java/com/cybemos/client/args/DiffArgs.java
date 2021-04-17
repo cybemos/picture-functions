@@ -12,7 +12,7 @@ import java.util.List;
 public class DiffArgs {
 
     @Parameter(names = "--source", description = "Image Source", required = true)
-    private List<String> sources = new ArrayList<>();;
+    private List<String> sources = new ArrayList<>();
 
     @Parameter(names = "--dest", description = "destination file", required = true)
     private String destination;

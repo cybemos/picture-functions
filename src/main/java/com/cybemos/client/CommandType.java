@@ -8,38 +8,38 @@ public enum CommandType {
 
     BLUR("blur") {
         @Override
-        public <R> R visit(CommandTypeVisitor<R> visitor) {
-            return visitor.visitBlur();
+        public void visit(CommandTypeVisitor visitor) {
+            visitor.visitBlur();
         }
     },
     QUADTREE("quadtree") {
         @Override
-        public <R> R visit(CommandTypeVisitor<R> visitor) {
-            return visitor.visitQuadTree();
+        public void visit(CommandTypeVisitor visitor) {
+            visitor.visitQuadTree();
         }
     },
     REVERSE("reverse") {
         @Override
-        public <R> R visit(CommandTypeVisitor<R> visitor) {
-            return visitor.visitReverse();
+        public void visit(CommandTypeVisitor visitor) {
+            visitor.visitReverse();
         }
     },
     SHAPE("shape") {
         @Override
-        public <R> R visit(CommandTypeVisitor<R> visitor) {
-            return visitor.visitShape();
+        public void visit(CommandTypeVisitor visitor) {
+            visitor.visitShape();
         }
     },
     DIFF("diff") {
         @Override
-        public <R> R visit(CommandTypeVisitor<R> visitor) {
-            return visitor.visitDiff();
+        public void visit(CommandTypeVisitor visitor) {
+            visitor.visitDiff();
         }
     },
     HELP("help") {
         @Override
-        public <R> R visit(CommandTypeVisitor<R> visitor) {
-            return visitor.visitHelp();
+        public void visit(CommandTypeVisitor visitor) {
+            visitor.visitHelp();
         }
     };
 
@@ -53,7 +53,7 @@ public enum CommandType {
         return name;
     }
 
-    public abstract <R> R visit(CommandTypeVisitor<R> visitor);
+    public abstract void visit(CommandTypeVisitor visitor);
 
     public static Optional<CommandType> from(String str) {
         return Stream.of(CommandType.values())
@@ -61,13 +61,13 @@ public enum CommandType {
                 .findFirst();
     }
 
-    public interface CommandTypeVisitor<R> {
-        R visitBlur();
-        R visitQuadTree();
-        R visitReverse();
-        R visitShape();
-        R visitDiff();
-        R visitHelp();
+    public interface CommandTypeVisitor {
+        void visitBlur();
+        void visitQuadTree();
+        void visitReverse();
+        void visitShape();
+        void visitDiff();
+        void visitHelp();
     }
 
 }

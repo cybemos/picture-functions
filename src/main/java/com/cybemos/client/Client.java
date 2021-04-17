@@ -31,46 +31,40 @@ public class Client {
         CommandType commandType = CommandType.from(parsedCommand)
                 .orElseThrow(() -> new RuntimeException("Unknown command : " + parsedCommand));
 
-        commandType.visit(new CommandTypeVisitor<Void>() {
+        commandType.visit(new CommandTypeVisitor() {
             @Override
-            public Void visitBlur() {
+            public void visitBlur() {
                 BlurCommand command = new BlurCommand();
                 command.execute(blurArgs);
-                return null;
             }
 
             @Override
-            public Void visitQuadTree() {
+            public void visitQuadTree() {
                 QuadTreeCommand command = new QuadTreeCommand();
                 command.execute(quadTreeArgs);
-                return null;
             }
 
             @Override
-            public Void visitReverse() {
+            public void visitReverse() {
                 ReverseCommand command = new ReverseCommand();
                 command.execute(reverseArgs);
-                return null;
             }
 
             @Override
-            public Void visitShape() {
+            public void visitShape() {
                 ShapeCommand shapeCommand = new ShapeCommand();
                 shapeCommand.execute(shapeArgs);
-                return null;
             }
 
             @Override
-            public Void visitDiff() {
+            public void visitDiff() {
                 DiffCommand command = new DiffCommand();
                 command.execute(diffArgs);
-                return null;
             }
 
             @Override
-            public Void visitHelp() {
+            public void visitHelp() {
                 help();
-                return null;
             }
         });
     }

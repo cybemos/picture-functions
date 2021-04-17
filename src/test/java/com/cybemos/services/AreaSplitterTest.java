@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 
 public class AreaSplitterTest {
 
-    private AreaSplitter splitter = new AreaSplitter();
+    private final AreaSplitter splitter = new AreaSplitter();
 
     @Test
     public void test_normal_split() {
