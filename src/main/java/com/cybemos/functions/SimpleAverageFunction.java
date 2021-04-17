@@ -9,6 +9,8 @@ import java.awt.image.BufferedImage;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 import static java.util.function.Function.identity;
 
 public class SimpleAverageFunction implements AverageFunction {
@@ -24,12 +26,11 @@ public class SimpleAverageFunction implements AverageFunction {
     }
 
     private Area getArea(BufferedImage image, int x, int y, int blurLevel) {
-        return new Area(
-                Math.max(0, x - blurLevel),
-                Math.max(0, y - blurLevel),
-                Math.min(image.getWidth() - 1 - x, x + blurLevel),
-                Math.min(image.getHeight() - 1 - y, y + blurLevel)
-        );
+        int areaX = max(0, x - blurLevel);
+        int areaY = max(0, y - blurLevel);
+        int endX = min(image.getWidth(), x + blurLevel + 1);
+        int endY = min(image.getHeight(), y + blurLevel + 1);
+        return new Area(areaX, areaY,  endX - areaX,  endY - areaY);
     }
 
     private Color computeAverage(BufferedImage image, Area area) {
@@ -37,7 +38,7 @@ public class SimpleAverageFunction implements AverageFunction {
         for (int y = area.getY() ; y < area.getY() + area.getHeight() ; y++) {
             for (int x = area.getX() ; x < area.getX() + area.getWidth() ; x++) {
                 Color color = Color.fromRGB(image.getRGB(x, y));
-                sumColor.add(new SumColor(color));
+                sumColor = sumColor.add(new SumColor(color));
             }
         }
         return sumColor.toColor();

@@ -1,14 +1,13 @@
 package com.cybemos.services;
 
 import com.cybemos.functions.HorizontalAverageFunction;
+import com.cybemos.functions.SimpleAverageFunction;
 import com.cybemos.model.Color;
 import com.cybemos.model.ColorPosition;
-import com.cybemos.model.SumColor;
 import org.junit.Test;
 
 import java.awt.image.BufferedImage;
 import java.util.List;
-import java.util.stream.IntStream;
 
 import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
 import static java.util.Comparator.comparingInt;
@@ -70,7 +69,7 @@ public class AverageFunctionTest {
     }
 
     @Test
-    public void test_multiple_pixels() {
+    public void compare_average_from_multiple_implementations() {
         // Given
         BufferedImage source = new BufferedImage(10, 1, TYPE_INT_ARGB);
         List<Color> colors = List.of(
@@ -85,37 +84,29 @@ public class AverageFunctionTest {
                 new Color(145, 85, 74, 255),
                 new Color(152, 48, 32, 255)
         );
-
-        int blurLevel = 1;
-
-        List<ColorPosition> expectedValues = IntStream.range(0, colors.size())
-                .mapToObj(i -> new ColorPosition(i,0, average(colors, i, blurLevel)))
-                .collect(toList());
-
         for (int x = 0 ; x < colors.size() ; x++) {
             source.setRGB(x, 0, colors.get(x).toARGB());
         }
-        HorizontalAverageFunction averageFunction = new HorizontalAverageFunction();
+
+        int blurLevel = 1;
+
+        HorizontalAverageFunction horizontalAverageFunction = new HorizontalAverageFunction();
+        SimpleAverageFunction simpleAverageFunction = new SimpleAverageFunction();
 
         // When
-        List<ColorPosition> colorPositions = averageFunction.average(source, blurLevel)
+        List<ColorPosition> colorPositions = horizontalAverageFunction.average(source, blurLevel)
                 .sorted(comparingInt(ColorPosition::getX).thenComparingInt(ColorPosition::getY))
                 .collect(toList());
 
         // Then
-        assertEquals(colors.size(), colorPositions.size());
-        for (int i = 0 ; i < colorPositions.size() ; i++) {
-            assertEquals(expectedValues.get(i), colorPositions.get(i));
-        }
-    }
+        List<ColorPosition> expectedValues = simpleAverageFunction.average(source, blurLevel)
+                .sorted(comparingInt(ColorPosition::getX).thenComparingInt(ColorPosition::getY))
+                .collect(toList());
 
-    private Color average(List<Color> colors, int index, int blurLevel) {
-        int begin = Math.max(0, index - blurLevel);
-        int end = Math.min(colors.size(), index + blurLevel + 1);
-        return colors.subList(begin, end).stream()
-                .map(SumColor::new)
-                .reduce(SumColor.EMPTY, SumColor::add)
-                .toColor();
+        assertEquals(expectedValues.size(), colorPositions.size());
+        for (int i = 0 ; i < colorPositions.size() ; i++) {
+            assertEquals("unexpected error at index " + i, expectedValues.get(i), colorPositions.get(i));
+        }
     }
 
 }
