@@ -56,7 +56,7 @@ public class Client {
 
             @Override
             public void visitHelp() {
-                help();
+                jCommander.usage();
             }
         };
     }
@@ -65,7 +65,7 @@ public class Client {
         jCommander.parse(args);
         String parsedCommand = jCommander.getParsedCommand();
         if (parsedCommand == null) {
-            help();
+            jCommander.usage();
             return;
         }
         CommandType commandType = CommandType.from(parsedCommand)
@@ -76,13 +76,6 @@ public class Client {
     public static void main(String[] args) {
         Client client = new Client();
         client.execute(args);
-    }
-
-    private void help() {
-        System.out.println("Available commands :");
-        for (CommandType commandType : CommandType.values()) {
-            System.out.println(" - " + commandType.getName());
-        }
     }
 
 }
