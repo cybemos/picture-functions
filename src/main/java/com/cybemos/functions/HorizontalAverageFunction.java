@@ -43,12 +43,12 @@ public class HorizontalAverageFunction implements AverageFunction {
 
     private Color average(List<SumColor> sumColors) {
         SumColor sumColor = sumColors.stream().reduce(SumColor::add).orElse(SumColor.EMPTY);
-        return sumColor.toColor();
+        return sumColor.average();
     }
 
     private SumColor sum(BufferedImage image, int x, int y, int blurLevel) {
         return IntStream.range(Math.max(0, y - blurLevel), Math.min(y + blurLevel, image.getHeight()))
-                .mapToObj(y2 -> new SumColor(Color.fromRGB(image.getRGB(x, y2))))
+                .mapToObj(y2 -> SumColor.of(Color.fromRGB(image.getRGB(x, y2))))
                 .reduce(SumColor::add).orElse(SumColor.EMPTY);
     }
 

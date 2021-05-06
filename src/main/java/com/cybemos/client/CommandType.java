@@ -1,9 +1,14 @@
 package com.cybemos.client;
 
+import lombok.Getter;
+
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+/**
+ * @implSpec This is a final, immutable and thread-safe enum.
+ */
 public enum CommandType {
 
     BLUR("blur") {
@@ -43,14 +48,11 @@ public enum CommandType {
         }
     };
 
+    @Getter
     private final String name;
 
     CommandType(String name) {
         this.name = name;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public abstract void visit(CommandTypeVisitor visitor);

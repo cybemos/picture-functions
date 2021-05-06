@@ -13,6 +13,11 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.util.function.Function.identity;
 
+/**
+ * One of the most simple average implementation.
+ * For each position, average is computed by getting the area around without any cache.
+ * When executed, this function has a very high complexity and takes a lot of time.
+ */
 public class SimpleAverageFunction implements AverageFunction {
 
     @Override
@@ -30,7 +35,7 @@ public class SimpleAverageFunction implements AverageFunction {
         int areaY = max(0, y - blurLevel);
         int endX = min(image.getWidth(), x + blurLevel + 1);
         int endY = min(image.getHeight(), y + blurLevel + 1);
-        return new Area(areaX, areaY,  endX - areaX,  endY - areaY);
+        return Area.of(areaX, areaY,  endX - areaX,  endY - areaY);
     }
 
     private Color computeAverage(BufferedImage image, Area area) {
@@ -38,10 +43,10 @@ public class SimpleAverageFunction implements AverageFunction {
         for (int y = area.getY() ; y < area.getY() + area.getHeight() ; y++) {
             for (int x = area.getX() ; x < area.getX() + area.getWidth() ; x++) {
                 Color color = Color.fromRGB(image.getRGB(x, y));
-                sumColor = sumColor.add(new SumColor(color));
+                sumColor = sumColor.add(SumColor.of(color));
             }
         }
-        return sumColor.toColor();
+        return sumColor.average();
     }
 
 }

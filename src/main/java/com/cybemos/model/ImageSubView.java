@@ -12,7 +12,7 @@ public class ImageSubView {
     @NonNull Area area;
 
     public static ImageSubView from(BufferedImage image) {
-        return new ImageSubView(image, new Area(0, 0, image.getWidth(), image.getHeight()));
+        return new ImageSubView(image, Area.of(0, 0, image.getWidth(), image.getHeight()));
     }
 
 }

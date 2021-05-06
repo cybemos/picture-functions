@@ -86,10 +86,10 @@ public class QuadTreeService {
         for (int i = area.getX() ; i < area.getX() + area.getWidth() ; i++) {
             for (int j = area.getY() ; j < area.getY() + area.getHeight() ; j++) {
                 Color color = Color.fromRGB(view.getImage().getRGB(i, j));
-                sumColor = sumColor.add(new SumColor(color));
+                sumColor = sumColor.add(SumColor.of(color));
             }
         }
-        return sumColor.toColor();
+        return sumColor.average();
     }
 
 }

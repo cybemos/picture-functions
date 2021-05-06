@@ -16,7 +16,7 @@ public class AreaSplitterTest {
     @Test
     public void when_area_is_2x2_then_output_is_4_area_of_dimensions_1x1() {
         // Given
-        Area area = new Area(0, 0, 2, 2);
+        Area area = Area.of(0, 0, 2, 2);
 
         // When
         List<Area> subAreas = splitter.split(area)
@@ -26,29 +26,29 @@ public class AreaSplitterTest {
 
         // Then
         assertEquals(4, subAreas.size());
-        assertEquals(new Area(0, 0, 1, 1), subAreas.get(0));
-        assertEquals(new Area(0, 1, 1, 1), subAreas.get(1));
-        assertEquals(new Area(1, 0, 1, 1), subAreas.get(2));
-        assertEquals(new Area(1, 1, 1, 1), subAreas.get(3));
+        assertEquals(Area.of(0, 0, 1, 1), subAreas.get(0));
+        assertEquals(Area.of(0, 1, 1, 1), subAreas.get(1));
+        assertEquals(Area.of(1, 0, 1, 1), subAreas.get(2));
+        assertEquals(Area.of(1, 1, 1, 1), subAreas.get(3));
     }
 
     @Test
     public void when_area_is_1x1_then_output_is_an_area_of_dimensions_1x1() {
         // Given
-        Area area = new Area(0, 0, 1, 1);
+        Area area = Area.of(0, 0, 1, 1);
 
         // When
         List<Area> subAreas = splitter.split(area);
 
         // Then
         assertEquals(1, subAreas.size());
-        assertEquals(new Area(0, 0, 1, 1), subAreas.get(0));
+        assertEquals(Area.of(0, 0, 1, 1), subAreas.get(0));
     }
 
     @Test
     public void when_area_is_1x10_then_output_is_2_areas_of_dimensions_1x5() {
         // Given
-        Area area = new Area(0, 0, 1, 10);
+        Area area = Area.of(0, 0, 1, 10);
 
         // When
         List<Area> subAreas = splitter.split(area)
@@ -58,14 +58,14 @@ public class AreaSplitterTest {
 
         // Then
         assertEquals(2, subAreas.size());
-        assertEquals(new Area(0, 0, 1, 5), subAreas.get(0));
-        assertEquals(new Area(0, 5, 1, 5), subAreas.get(1));
+        assertEquals(Area.of(0, 0, 1, 5), subAreas.get(0));
+        assertEquals(Area.of(0, 5, 1, 5), subAreas.get(1));
     }
 
     @Test
     public void when_area_is_10x1_then_output_is_2_areas_of_dimensions_5x1() {
         // Given
-        Area area = new Area(0, 0, 10, 1);
+        Area area = Area.of(0, 0, 10, 1);
 
         // When
         List<Area> subAreas = splitter.split(area)
@@ -75,8 +75,8 @@ public class AreaSplitterTest {
 
         // Then
         assertEquals(2, subAreas.size());
-        assertEquals(new Area(0, 0, 5, 1), subAreas.get(0));
-        assertEquals(new Area(5, 0, 5, 1), subAreas.get(1));
+        assertEquals(Area.of(0, 0, 5, 1), subAreas.get(0));
+        assertEquals(Area.of(5, 0, 5, 1), subAreas.get(1));
     }
 
 }

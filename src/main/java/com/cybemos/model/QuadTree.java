@@ -1,16 +1,21 @@
 package com.cybemos.model;
 
 import lombok.NonNull;
+import lombok.ToString;
 import lombok.Value;
 
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * @implSpec This class is immutable and thread-safe.
+ */
 @Value
 public class QuadTree {
 
     int deepness;
     int numberOfNodes;
+    @ToString.Exclude
     @NonNull Node root;
 
     public QuadTree(Node root) {
@@ -30,14 +35,9 @@ public class QuadTree {
         return root.getArea().getHeight();
     }
 
-    @Override
-    public String toString() {
-        return "QuadTree{" +
-                "deepness=" + deepness +
-                ", numberOfNodes=" + numberOfNodes +
-                '}';
-    }
-
+    /**
+     * @implSpec This class is immutable and thread-safe.
+     */
     @Value
     public static class Node {
 
@@ -59,22 +59,6 @@ public class QuadTree {
 
         public static Node from(int deepness, Area area, List<Node> children) {
             return new Node(deepness, area, null, children);
-        }
-
-        public int getDeepness() {
-            return deepness;
-        }
-
-        public List<Node> getChildren() {
-            return children;
-        }
-
-        public Area getArea() {
-            return area;
-        }
-
-        public Color getColor() {
-            return color;
         }
 
         public int computeDeepness() {

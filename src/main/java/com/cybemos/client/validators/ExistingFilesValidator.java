@@ -6,6 +6,9 @@ import com.beust.jcommander.ParameterException;
 import java.io.File;
 import java.util.List;
 
+/**
+ * Validator that validate that input is a list of existing files.
+ */
 public class ExistingFilesValidator implements IValueValidator<List<File>> {
 
     private final ExistingFileValidator validator;

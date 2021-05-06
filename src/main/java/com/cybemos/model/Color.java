@@ -2,6 +2,9 @@ package com.cybemos.model;
 
 import lombok.Value;
 
+/**
+ * @implSpec This class is immutable and thread-safe.
+ */
 @Value
 public class Color {
 

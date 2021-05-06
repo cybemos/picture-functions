@@ -149,7 +149,7 @@ public class QuadTreeServiceTest {
         // Given
         QuadTreeService quadTreeService = new QuadTreeService();
         Color red =  Color.RED;
-        QuadTree.Node root = QuadTree.Node.from(1, new Area(0, 0, 512, 256), red);
+        QuadTree.Node root = QuadTree.Node.from(1, Area.of(0, 0, 512, 256), red);
         QuadTree quadTree = new QuadTree(root);
 
         // When
@@ -165,7 +165,7 @@ public class QuadTreeServiceTest {
         // Given
         QuadTreeService quadTreeService = new QuadTreeService();
         Color red =  Color.RED;
-        QuadTree.Node root = QuadTree.Node.from(1, new Area(0, 0, 1, 1), red);
+        QuadTree.Node root = QuadTree.Node.from(1, Area.of(0, 0, 1, 1), red);
         QuadTree quadTree = new QuadTree(root);
 
         // When

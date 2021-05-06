@@ -3,8 +3,13 @@ package com.cybemos.model;
 import lombok.AllArgsConstructor;
 import lombok.Value;
 
+/**
+ * This class allow to add multiple colors to get the average color.
+ *
+ * @implSpec This class is immutable and thread-safe.
+ */
 @Value
-@AllArgsConstructor
+@AllArgsConstructor(staticName = "of")
 public class SumColor {
 
     public static final SumColor EMPTY = new SumColor();
@@ -23,12 +28,8 @@ public class SumColor {
         alpha = 0;
     }
 
-    public SumColor(Color color) {
-        number = 1;
-        red = color.getRed();
-        green = color.getGreen();
-        blue = color.getBlue();
-        alpha = color.getAlpha();
+    public static SumColor of(Color color) {
+        return SumColor.of(1, color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
     }
 
     public SumColor add(SumColor sumColor) {
@@ -38,7 +39,7 @@ public class SumColor {
         if (sumColor == EMPTY) {
             return this;
         }
-        return new SumColor(
+        return SumColor.of(
                 number + sumColor.number,
                 red + sumColor.red,
                 green + sumColor.green,
@@ -47,7 +48,10 @@ public class SumColor {
         );
     }
 
-    public Color toColor() {
+    /**
+     * @return the average color or {@link Color#TRANSPARENT} if there is no color
+     */
+    public Color average() {
         if (number <= 0) {
             return Color.TRANSPARENT;
         }

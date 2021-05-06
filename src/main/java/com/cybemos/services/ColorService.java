@@ -2,6 +2,9 @@ package com.cybemos.services;
 
 import com.cybemos.model.Color;
 
+/**
+ * Functions on colors.
+ */
 public class ColorService {
 
     public boolean looksLike(Color c1, Color c2, double quality) {
